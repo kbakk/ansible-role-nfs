@@ -1,2 +1,12 @@
 ---
-- include: "{{nfs_mode}}.yaml"
+- name: Load a variable file based on the OS type, or a default if not found. Using free-form to specify the file.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}.yml"
+    - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+
+- include: server.yaml
+  when: "'server' in nfs_mode"
+
+- include: client.yaml
+  when: "'client' in nfs_mode"

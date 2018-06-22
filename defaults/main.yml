@@ -1,14 +1,18 @@
 ---
 # NFS install mode: server or client
-nfs_mode: server
+nfs_mode: []
+# Example:
+# nfs_mode: ['client', 'server']
 
 # Line to add to the /etc/exports file
-nfs_exports:
-  - path: "/home"
-    export: "vnode*(fsid=0,rw,async,no_root_squash,no_subtree_check,insecure)"
+# Example:
+# nfs_exports:
+#   - path: "/home"
+#     export: "*(fsid=0,rw,async,no_root_squash,no_subtree_check,insecure)"
 
 # Line to add to the /etc/fstab file
-nfs_client_imports:
-  - local: "/home"
-    remote: "/home"
-    server_host: "{{hostvars['server']['ansible_default_ipv4']}}"
+# Example:
+# nfs_client_imports:
+#   - local: "/home"
+#     remote: "/home"
+#     server_host: "{{hostvars['server']['ansible_default_ipv4']}}"

@@ -1,2 +1,6 @@
+---
 - name: restart idmapd
   service: name=idmapd state=restarted
+
+- name: restart nfs service
+  service: name={{ nfs_service }} state=restarted

@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  tasks:
+    - name: echo client
+      raw: "echo 'client'"
+      changed_when: false
+  roles:
+    - role: ansible-role-nfs
+  vars:
+    nfs_mode: ["server", "client"]
+    nfs_exports:
+      - path: "/tmp"
+        export: "*(fsid=0,rw,async,no_root_squash,no_subtree_check,insecure)"
+    nfs_client_imports:
+      - local: "/mnt/remote"
+        remote: "/tmp"
+        server_host: "localhost"

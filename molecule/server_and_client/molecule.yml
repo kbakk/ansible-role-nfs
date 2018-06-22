@@ -1,0 +1,16 @@
+---
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+platforms:
+  - name: server-and-client-c7-instance
+    box: centos/7
+  - name: server-and-client-u16-instance
+    box: ubuntu/xenial64
+scenario:
+  name: server_and_client
+verifier:
+  name: testinfra
+  additional_files_or_dirs:
+    - ../default/tests/*

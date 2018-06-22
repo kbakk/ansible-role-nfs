@@ -1,8 +1,3 @@
 ---
-    - name: update repositories cache and install NFS in Deb systems
-      apt: name=nfs-kernel-server,nfs-common update_cache=yes cache_valid_time=3600
-
-    - set_fact: NFS_SERVICE="nfs-kernel-server"
-
-
-
+- name: update repositories cache and install NFS in Deb systems
+  apt: name=nfs-kernel-server,nfs-common update_cache=yes cache_valid_time=3600

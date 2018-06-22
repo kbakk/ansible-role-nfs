@@ -3,14 +3,15 @@ NFS server/client Role
 
 Install NFS server/client. This role has been specifically developed to be used in the INDIGO project.
 
+
 Role Variables
 --------------
 
 The variables that can be passed to this role and a brief description about them are as follows.
 
 ```yaml
-# NFS install mode: server or client
-nfs_mode: server
+# NFS install mode: server and/or client
+nfs_mode: ["server"]
 
 # Line to add to the /etc/exports file
 nfs_exports:
@@ -44,6 +45,15 @@ This an example of how to install a Torque/PBS cluster:
       roles:
       - { role: 'indigo-dc.nfs', nfs_mode: 'client', nfs_client_imports: [{ local: "/home", remote: "/home", server_host: "{{hostvars['server']['ansible_default_ipv4']}}" }] }
 ```
+
+
+Development
+-----------
+
+Using [molecule](https://molecule.readthedocs.io/en/latest/index.html) to test and develop the playbook.
+
+Install it in virtualenv - run `pip install -r test-requirements.txt`. Then run `molecule test --all` to run throught the scenarios. 
+
 
 License
 -------

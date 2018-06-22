@@ -1,0 +1,23 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install python for Ansible
+      raw: |
+        if [ ! -n "$(command -v python)" ]; then
+            echo "installing python"
+          if [ -n "$(command -v apt)" ]; then
+            (apt -y update && apt install -y python-minimal)
+          elif [ -n "$(command -v yum)" ]; then
+            yum -y update
+            yum -y install yum-utils
+            yum -y groupinstall development
+            yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+            yum -y install python36u
+          fi
+        fi
+        python --version
+
+      become: true
+      changed_when: false

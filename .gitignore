@@ -1,0 +1,4 @@
+*.retry
+*.py[co]
+.tox
+*.log
