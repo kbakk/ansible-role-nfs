@@ -54,6 +54,14 @@ Using [molecule](https://molecule.readthedocs.io/en/latest/index.html) to test a
 
 Install it in virtualenv - run `pip install -r test-requirements.txt`. Then run `molecule test --all` to run throught the scenarios. 
 
+There are three scenarios:
+
+* `molecule test -s default` to use the default server only scenario on Vagrant/Virtualbox 
+* `molecule test -s server_client_on_docker` to test server+client on Docker provisioned host
+  * The host acts both as server and client, i.e. client is mounting localhost
+* `molecule test -s server_and_client` to test server+client on Vagrant/Virtualbox 
+  * The host acts both as server and client, i.e. client is mounting localhost
+
 
 License
 -------

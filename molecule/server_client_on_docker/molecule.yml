@@ -1,0 +1,22 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: docker-c7s
+    image: centos/systemd
+    # command: "/bin/bash -c exec /sbin/init --log-target=journal 3>&1"
+    # security_opts: ['seccomp=unconfined']
+    privileged: true
+    volumes: ['/sys/fs/cgroup:/sys/fs/cgroup:ro', 'exports:/exports']
+    tmpfs: ['/run', '/run/lock']
+    command: "/usr/sbin/init"
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: server_client_on_docker
+verifier:
+  name: testinfra
+  additional_files_or_dirs:
+    - ../default/tests/test_nfs_server.py

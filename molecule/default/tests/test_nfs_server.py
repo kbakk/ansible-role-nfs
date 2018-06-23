@@ -13,7 +13,7 @@ def test_nfs_common_is_installed(host, os_map):
 def test_nfs_exports_exist(host, os_map):
     exports = host.check_output(os_map['cmd_showmount'] +
                                 ' --exports --no-headers')
-    assert exports.strip() == '/tmp *'
+    assert exports.strip() == '/exports *'
 
 
 def test_nfs_services_running(host):

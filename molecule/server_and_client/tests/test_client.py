@@ -15,7 +15,7 @@ def test_nfs_client_package(host, os_map):
 def test_showmount_returns_mountentry(host, os_map):
     ''' Executing showmount command
             $ showmount --all --no-header ::1
-            ::1:/tmp
+            ::1:/exports
         Ensure output is the same'''
 
     mount = host.check_output(os_map['cmd_showmount'] +
@@ -25,12 +25,12 @@ def test_showmount_returns_mountentry(host, os_map):
 
 def test_mount_returns_mountentry(host):
     ''' Executing mount command
-            $ mount|grep /tmp
-            localhost:/tmp on /mnt/remote type nfs (rw,relatime,vers=3...remov\
+            $ mount|grep /exports
+            localhost:/exports on /mnt/remote type nfs (rw,relatime,vers=3...remov\
             ed...)
         Ensure output is the same'''
     mount = host.check_output('mount|grep /mnt/remote')
-    assert mount.strip().startswith('localhost:/tmp on /mnt/remote type nfs '
+    assert mount.strip().startswith('localhost:/exports on /mnt/remote type nfs '
                                     '(rw,relatime,vers=3')
 
 
@@ -39,7 +39,7 @@ def test_filewrite_on_mount_reflects_on_server(host):
     uuid_string = str(uuid.uuid4())
     host.check_output('echo {0:s} > /mnt/remote/test_{0:s}.txt'.format(
         uuid_string))
-    f = host.file('/tmp/test_{}.txt'.format(uuid_string))
+    f = host.file('/exports/test_{}.txt'.format(uuid_string))
     assert f.exists
     assert f.content_string == uuid_string
 

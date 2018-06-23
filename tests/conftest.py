@@ -14,6 +14,6 @@ def os_map(host):
         cmd_showmount=dict(debian='/sbin/showmount',
                            redhat='/usr/sbin/showmount'),
         pkg_nfsutils=dict(debian='nfs-common', redhat='nfs-utils'),
-        stdout_showmount_nfs_1=dict(debian='127.0.0.1:/tmp', redhat='::1:/tmp')
+        stdout_showmount_nfs_1=dict(debian='127.0.0.1:/exports', redhat='::1:/exports')
     )
     return {k: v[os_fam] for k, v in map_.items()}
